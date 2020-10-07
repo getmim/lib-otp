@@ -28,7 +28,7 @@ class Otp
     static function generate(string $identity, int $len=6, string $expires='+2 hour'): string {
         // get exists if any
         $otp_ex = _Otp::getOne(['identity'=>$identity, 'status'=>1]);
-        if($otp_ex){
+        if($otp_ex && !self::expire($otp_ex)){
             $otp_ex_set = [
                 'expires' => date('Y-m-d H:i:s', strtotime($expires))
             ];
