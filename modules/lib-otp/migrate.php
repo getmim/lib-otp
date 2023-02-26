@@ -30,7 +30,7 @@ return [
                 'index' => 3000
             ],
             'status' => [
-                'comment' => '0 Expires, 1 Active, 2 Verified',
+                'comment' => '0 Expired, 1 Active, 2 Verified',
                 'type' => 'TINYINT',
                 'attrs' => [
                     'null' => false,

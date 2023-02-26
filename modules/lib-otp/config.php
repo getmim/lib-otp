@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'lib-otp',
-    '__version' => '0.0.2',
+    '__version' => '0.1.0',
     '__git' => 'git@github.com:getmim/lib-otp.git',
     '__license' => 'MIT',
     '__author' => [
@@ -17,6 +17,12 @@ return [
         'required' => [
             [
                 'lib-model' => NULL
+            ],
+            [
+                'lib-formatter' => NULL
+            ],
+            [
+                'lib-enum' => NULL
             ]
         ],
         'optional' => []
@@ -33,5 +39,42 @@ return [
             ]
         ],
         'files' => []
+    ],
+    'libEnun' => [
+        'enums' => [
+            'otp.status' => ['Expired', 'Active', 'Verified']
+        ]
+    ],
+    'libFormatter' => [
+        'formats' => [
+            'otp' => [
+                'id' => [
+                    'type' => 'number'
+                ],
+                'identity' => [
+                    'type' => 'text'
+                ],
+                'otp' => [
+                    'type' => 'text'
+                ],
+                'status' => [
+                    'type' => 'enum',
+                    'enum' => 'otp.status',
+                    'vtype' => 'int'
+                ],
+                'validated' => [
+                    'type' => 'date'
+                ],
+                'expires' => [
+                    'type' => 'date'
+                ],
+                'updated' => [
+                    'type' => 'date'
+                ],
+                'created' => [
+                    'type' => 'date'
+                ]
+            ]
+        ]
     ]
 ];
