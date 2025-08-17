@@ -6,9 +6,9 @@ return [
             'id' => [
                 'type' => 'INT',
                 'attrs' => [
-                    'unsigned' => TRUE,
-                    'primary_key' => TRUE,
-                    'auto_increment' => TRUE
+                    'unsigned' => true,
+                    'primary_key' => true,
+                    'auto_increment' => true
                 ],
                 'index' => 1000
             ],
@@ -16,7 +16,7 @@ return [
                 'type' => 'VARCHAR',
                 'length' => 50,
                 'attrs' => [
-                    'null' => FALSE
+                    'null' => false
                 ],
                 'index' => 2000
             ],
@@ -25,7 +25,7 @@ return [
                 'length' => 50,
                 'attrs' => [
                     'null' => false,
-                    'unique' => true 
+                    'unique' => true
                 ],
                 'index' => 3000
             ],
@@ -42,14 +42,14 @@ return [
             'validated' => [
                 'type' => 'DATETIME',
                 'attrs' => [
-                    'null' => true 
+                    'null' => true
                 ],
                 'index' => 5000
             ],
             'expires' => [
                 'type' => 'DATETIME',
                 'attrs' => [
-                    'null' => false 
+                    'null' => false
                 ],
                 'index' => 6000
             ],

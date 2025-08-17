@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'lib-otp',
-    '__version' => '0.1.0',
+    '__version' => '1.0.0',
     '__git' => 'git@github.com:getmim/lib-otp.git',
     '__license' => 'MIT',
     '__author' => [
@@ -16,13 +16,13 @@ return [
     '__dependencies' => [
         'required' => [
             [
-                'lib-model' => NULL
+                'lib-model' => null
             ],
             [
-                'lib-formatter' => NULL
+                'lib-formatter' => null
             ],
             [
-                'lib-enum' => NULL
+                'lib-enum' => null
             ]
         ],
         'optional' => []
