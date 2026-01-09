@@ -27,6 +27,6 @@ $valid = Otp::validate($u_phone, $u_otp);
 
 ## Method
 
-### static generate(string $identity, int $len=6, string $expires='+2 hour'): string
+### static generate(string $identity, int $len=6, string $expires='+2 hour', string $retry='+60 seconds'): object
 
 ### static validate(string $identity, string $otp): bool

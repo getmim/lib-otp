@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'lib-otp',
-    '__version' => '1.0.0',
+    '__version' => '1.1.0',
     '__git' => 'git@github.com:getmim/lib-otp.git',
     '__license' => 'MIT',
     '__author' => [
@@ -66,6 +66,9 @@ return [
                     'type' => 'date'
                 ],
                 'expires' => [
+                    'type' => 'date'
+                ],
+                'retry' => [
                     'type' => 'date'
                 ],
                 'updated' => [

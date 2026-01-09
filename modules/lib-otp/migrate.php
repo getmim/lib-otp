@@ -53,6 +53,13 @@ return [
                 ],
                 'index' => 6000
             ],
+            'retry' => [
+                'type' => 'DATETIME',
+                'attrs' => [
+                    'null' => false
+                ],
+                'index' => 7000
+            ],
             'updated' => [
                 'type' => 'TIMESTAMP',
                 'attrs' => [
@@ -67,6 +74,13 @@ return [
                     'default' => 'CURRENT_TIMESTAMP'
                 ],
                 'index' => 11000
+            ]
+        ],
+        'indexes' => [
+            'by_identity' => [
+                'fields' => [
+                    'identity' => []
+                ]
             ]
         ]
     ]

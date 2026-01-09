@@ -14,5 +14,5 @@ class Otp extends \Mim\Model
 
     protected static $chains = [];
 
-    protected static $q = ['identity'];
+    protected static $q = [];
 }

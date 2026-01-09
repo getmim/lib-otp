@@ -2,7 +2,7 @@
 /**
  * Otp
  * @package lib-otp
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace LibOtp\Library;
@@ -27,23 +27,40 @@ class Otp
         return true;
     }
 
-    public static function generate(string $identity, int $len = 6, string $expires = '+2 hour'): string
-    {
-        // get exists if any
-        $otp_ex = _Otp::getOne(['identity'=>$identity, 'status'=>1]);
-        if ($otp_ex && !self::expire($otp_ex)) {
-            $otp_ex_set = [
+    public static function generate(
+        string $identity,
+        int $len = 6,
+        string $expires = '+2 hour',
+        string $retry = '+60 seconds'
+    ): object {
+        $cond = [
+            'identity' => $identity,
+            'status' => 1
+        ];
+
+        $ex_otp = _Otp::getOne($cond);
+        if ($ex_otp && !self::expire($ex_otp)) {
+            // Update expiration time
+            $ex_otp_set = [
                 'expires' => date('Y-m-d H:i:s', strtotime($expires))
             ];
-            _Otp::set($otp_ex_set, ['id'=>$otp_ex->id]);
 
-            return $otp_ex->otp;
+            // If retry count is less then now, reset the timer
+            $t_retry = strtotime($ex_otp->retry);
+            if ($t_retry <= time()) {
+                $ex_otp_set['retry'] = date('Y-m-d H:i:s', strtotime($retry));
+            }
+
+            _Otp::set($ex_otp_set, ['id' => $ex_otp->id]);
+            $ex_otp = _Otp::getOne(['id' => $ex_otp->id]);
+            return $ex_otp;
         }
 
         $otp_cr = [
             'identity' => $identity,
             'otp'      => null,
-            'expires'  => date('Y-m-d H:i:s', strtotime($expires))
+            'expires'  => date('Y-m-d H:i:s', strtotime($expires)),
+            'retry'    => date('Y-m-d H:i:s', strtotime($retry))
         ];
 
         $rn_start = '1' . str_repeat('0', $len-1);
@@ -61,8 +78,9 @@ class Otp
             break;
         }
 
-        _Otp::create($otp_cr);
-        return $otp_cr['otp'];
+        $id = _Otp::create($otp_cr);
+        $otp_cr = _Otp::getOne(['id' => $id]);
+        return $otp_cr;
     }
 
     public static function validate(string $identity, string $otp): bool
